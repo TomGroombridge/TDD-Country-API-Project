@@ -3,6 +3,7 @@ const axios = require("axios");
 module.exports = class CountryApi {
   constructor() {
     this.url = "https://restcountries.com/v2";
+    console.log("hi its charlotte");
   }
   async fetchAll() {
     try {
