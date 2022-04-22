@@ -8,6 +8,7 @@ module.exports = class CountryApi {
   async fetchAll() {
     try {
       const result = await axios.get(`${this.url}/all`);
+      console.log(result);
       return result;
     } catch (error) {
       return [];
@@ -28,6 +29,30 @@ module.exports = class CountryApi {
       const result = await axios.get(
         `${this.url}/all?fields=name,population,region,flag,capital`
       );
+      return result;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async fetchCurrency(currency) {
+    try {
+      const result = await axios.get(
+        `${this.url}/currency/${currency}?fields=name,population,region,flag,capital`
+      );
+      console.log(result);
+      return result;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async fetchRegionalBloc(regionalBloc) {
+    try {
+      const result = await axios.get(
+        `${this.url}/regionalbloc/${regionalBloc}?fields=name,population,region,flag,capital`
+      );
+      console.log(result);
       return result;
     } catch (error) {
       return [];
