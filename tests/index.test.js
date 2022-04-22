@@ -5,7 +5,9 @@ const {
   unitedCountryData,
   networkError,
   apiResponseData,
+  currencyStats,
 } = require("./mocks/countryData.js");
+// const currencyStats = require("./mocks/currencyData.js");
 
 jest.mock("axios");
 
@@ -76,6 +78,23 @@ describe("format data for response", () => {
   it("should return empty object if you cannot return data", async () => {
     axios.get.mockRejectedValueOnce(networkError);
     const result = await new CountryApi().allCountriesFormatted();
+    expect(result).toEqual([]);
+  });
+});
+
+describe("fetch list of countries that use the same currency", () => {
+  it.only("should return an array of countries that use the same currency", async () => {
+    axios.get.mockResolvedValueOnce(currencyStats);
+    const result = await new CountryApi().fetchCurrency();
+    expect(result[1].name).toEqual("Guernsey");
+  });
+
+  it("should return an error if API call fails", async () => {
+    axios.get.mockRejectedValueOnce(networkError);
+    const result = await new CountryApi().fetchCurrency("gbp");
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://restcountries.com/v2/name/united"
+    );
     expect(result).toEqual([]);
   });
 });
