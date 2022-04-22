@@ -4,10 +4,10 @@ const {
   allCountryData,
   unitedCountryData,
   networkError,
-  apiResponseData,
-  currencyStats,
+  formattedData,
+  poundData,
+  caricomData,
 } = require("./mocks/countryData.js");
-// const currencyStats = require("./mocks/currencyData.js");
 
 jest.mock("axios");
 
@@ -15,7 +15,7 @@ describe("Fetching all countries data", () => {
   it("should be able to fetch all country data", async () => {
     axios.get.mockResolvedValueOnce(allCountryData);
     const result = await new CountryApi().fetchAll();
-    expect(result[0].name).toEqual("Afhanistan");
+    expect(result[0].name).toEqual("Afghanistan");
   });
 
   it("should return an error if API call fails", async () => {
@@ -29,7 +29,7 @@ describe("Fetching all countries data", () => {
 describe("fetch country by partial name", () => {
   it("should return an array of potential countries and their data", async () => {
     axios.get.mockResolvedValueOnce(unitedCountryData);
-    const result = await new CountryApi().fetchCountries("united");
+    const result = await new CountryApi().fetchCountries();
     expect(result.length).toEqual(3);
   });
 
@@ -45,7 +45,7 @@ describe("fetch country by partial name", () => {
 
 describe("format data for response", () => {
   it("should return new object of data", async () => {
-    axios.get.mockResolvedValueOnce(apiResponseData);
+    axios.get.mockResolvedValueOnce(formattedData);
     const result = await new CountryApi().allCountriesFormatted();
     expect(result).toEqual([
       {
@@ -83,18 +83,43 @@ describe("format data for response", () => {
 });
 
 describe("fetch list of countries that use the same currency", () => {
-  it.only("should return an array of countries that use the same currency", async () => {
-    axios.get.mockResolvedValueOnce(currencyStats);
+  it("should return an array of countries that use the same currency", async () => {
+    axios.get.mockResolvedValueOnce(poundData);
     const result = await new CountryApi().fetchCurrency();
     expect(result[1].name).toEqual("Guernsey");
   });
 
   it("should return an error if API call fails", async () => {
     axios.get.mockRejectedValueOnce(networkError);
-    const result = await new CountryApi().fetchCurrency("gbp");
-    expect(axios.get).toHaveBeenCalledWith(
-      "https://restcountries.com/v2/name/united"
-    );
+    const result = await new CountryApi().fetchCurrency();
+    expect(result).toEqual([]);
+  });
+});
+
+describe("fetch list of countries in same regional bloc", () => {
+  it("should return an array of countries in the same regional bloc", async () => {
+    axios.get.mockResolvedValueOnce(caricomData);
+    const result = await new CountryApi().fetchRegionalBloc("caricom");
+    expect(result[0].name).toEqual("Antigua and Barbuda");
+  });
+
+  it("should return an error if API call fails", async () => {
+    axios.get.mockRejectedValueOnce(networkError);
+    const result = await new CountryApi().fetchRegionalBloc();
+    expect(result).toEqual([]);
+  });
+});
+
+describe("fetch list of countries that speak the same language", () => {
+  it("should return an array of countries that speak the same language", async () => {
+    axios.get.mockResolvedValueOnce(germanData);
+    const result = await new CountryApi().fetchLanguage();
+    expect(result[0].name).toEqual("");
+  });
+
+  it("should return an error if API call fails", async () => {
+    axios.get.mockRejectedValueOnce(networkError);
+    const result = await new CountryApi().fetchLanguage();
     expect(result).toEqual([]);
   });
 });
