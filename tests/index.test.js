@@ -7,6 +7,7 @@ const {
   formattedData,
   poundData,
   caricomData,
+  germanData,
 } = require("./mocks/countryData.js");
 
 jest.mock("axios");
@@ -114,7 +115,7 @@ describe("fetch list of countries that speak the same language", () => {
   it("should return an array of countries that speak the same language", async () => {
     axios.get.mockResolvedValueOnce(germanData);
     const result = await new CountryApi().fetchLanguage();
-    expect(result[0].name).toEqual("");
+    expect(result[0].name).toEqual("Austria");
   });
 
   it("should return an error if API call fails", async () => {

@@ -213,6 +213,65 @@ const caricomData = [
   },
 ];
 
+const germanData = [
+  {
+    name: "Austria",
+    capital: "Vienna",
+    region: "Europe",
+    population: 8917205,
+    flag: "https://flagcdn.com/at.svg",
+    independent: false,
+  },
+  {
+    name: "Belgium",
+    capital: "Brussels",
+    region: "Europe",
+    population: 11555997,
+    flag: "https://flagcdn.com/be.svg",
+    independent: false,
+  },
+  {
+    name: "Germany",
+    capital: "Berlin",
+    region: "Europe",
+    population: 83240525,
+    flag: "https://flagcdn.com/de.svg",
+    independent: false,
+  },
+  {
+    name: "Vatican City",
+    capital: "Vatican City",
+    region: "Europe",
+    population: 451,
+    flag: "https://flagcdn.com/va.svg",
+    independent: false,
+  },
+  {
+    name: "Liechtenstein",
+    capital: "Vaduz",
+    region: "Europe",
+    population: 38137,
+    flag: "https://flagcdn.com/li.svg",
+    independent: false,
+  },
+  {
+    name: "Luxembourg",
+    capital: "Luxembourg",
+    region: "Europe",
+    population: 632275,
+    flag: "https://flagcdn.com/lu.svg",
+    independent: false,
+  },
+  {
+    name: "Switzerland",
+    capital: "Bern",
+    region: "Europe",
+    population: 8636896,
+    flag: "https://flagcdn.com/ch.svg",
+    independent: false,
+  },
+];
+
 module.exports = {
   allCountryData,
   unitedCountryData,
@@ -220,4 +279,5 @@ module.exports = {
   formattedData,
   poundData,
   caricomData,
+  germanData,
 };

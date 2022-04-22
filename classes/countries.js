@@ -57,4 +57,16 @@ module.exports = class CountryApi {
       return [];
     }
   }
+
+  async fetchLanguage(language) {
+    try {
+      const result = await axios.get(
+        `${this.url}/lang/${language}?fields=name,population,region,flag,capital`
+      );
+      console.log(result);
+      return result;
+    } catch (error) {
+      return [];
+    }
+  }
 };

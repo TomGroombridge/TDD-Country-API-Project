@@ -4,4 +4,4 @@ const country = new CountryApi();
 
 // country.fetchCurrency("gbp");
 
-country.fetchRegionalBloc("caricom");
+country.fetchLanguage("de");
